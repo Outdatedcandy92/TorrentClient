@@ -18,14 +18,18 @@ def search_torrents(query):
             headers = ["#", "Title", "Seeds", "Leeches", "Ratio"]
             print(tabulate(table, headers, tablefmt="grid"))
             
+
             choice = int(input("Enter the number of the torrent you want to download: ")) - 1
             selected_torrent = results[choice]
             
+
             torrent_url = selected_torrent.magnetlink
             
+
             os.system(f"webtorrent \"{torrent_url}\" --select")
             
-            file_choice = int(input("Enter the number of the file you want to play: ")) - 1
+
+            file_choice = int(input("Enter the number of the file you want to play: ")) 
             
             return torrent_url, file_choice
         else:
@@ -39,7 +43,9 @@ def search_torrents(query):
 
 def stream_torrent(torrent_url, file_choice):
     try:
-        os.system(f"webtorrent \"{torrent_url}\" --select {file_choice} --mpv")
+     
+        adjusted_file_choice = file_choice 
+        os.system(f"webtorrent \"{torrent_url}\" --select {adjusted_file_choice} --mpv")
     except Exception as e:
         print(f"An error occurred: {e}")
         return None
